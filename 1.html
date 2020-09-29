@@ -3,11 +3,11 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Page1</title>
+        <title>Page4</title>
 	<style>
    		h1 {
-		background: #006400;
 		color: #FFFFFF;
+		font-size: 2.5em;
     		padding: 2px;
 		}
 		.col {
@@ -24,20 +24,24 @@
     		-moz-column-gap: 30px;
     		column-gap: 30px;
    		}
- 		.column2 {
- 		-webkit-column-width: 266px;
-    		-moz-column-width: 266px;
-    		column-width: 266px;
-    		-webkit-column-count: 3;
-    		-moz-column-count: 3;
-  		column-count: 3;
-    		-webkit-column-gap: 15px;
-    		-moz-column-gap: 15px;
-    		column-gap: 15px;
-   		}
 		.b1 {
-		background-color: #FFDEAD;
+		background: #FFDEAD;
 		display: inline;
+		-webkit-transition-property: background;
+    		 -moz-transition-property: background;
+       		-o-transition-property: background;
+          	transition-property: background;
+  		-webkit-transition-duration: 0.5s;
+     		-moz-transition-duration: 0.5s;
+      		-o-transition-duration: 0.5s;
+          	transition-duration: 0.5s;
+  		-webkit-transition-timing-function: linear;
+     		-moz-transition-timing-function: linear;
+       		-o-transition-timing-function: linear;
+          	transition-timing-function: linear;
+		}
+		.b1:active {
+		background: #FFD700;
 		}
 		.outline {
     		border: 1px solid #00FF7F;
@@ -45,10 +49,30 @@
 		background-color: #FFFFFF
 		}
 		.numb {
-		background-color: green;
 		color: #FFFFFF;
 		display: inline;
-		font-size: 30px;
+		font-size: 2.5em;
+		position: fixed;
+    		bottom: 15px;
+    		right: 15px;
+		}
+		.gr{
+		background: linear-gradient(to top, #32CD32, #008000, #006400);
+		-webkit-transition-property: background;
+    		 -moz-transition-property: background;
+       		-o-transition-property: background;
+          	transition-property: background;
+  		-webkit-transition-duration: 2s;
+     		-moz-transition-duration: 2s;
+      		-o-transition-duration: 2s;
+          	transition-duration: 2s;
+  		-webkit-transition-timing-function: linear;
+     		-moz-transition-timing-function: linear;
+       		-o-transition-timing-function: linear;
+          	transition-timing-function: linear;
+		}
+		.gr:hover {
+		background: linear-gradient(to top, #FF7F50, #FF6347, #FF4500);
 		}
   	</style>
     </head>
@@ -56,7 +80,7 @@
 	<pre><font color="blue"><B>G</B> discourse markers(1): linkers</font>                   'I owe my success to having listened respectfully to the very best advice</pre>
 	<pre><B>V</B> work                                                                   and then going away and doing the exact opposite.'</pre>
 	<pre><B>P</B> word stress and rhythm                                                          <I>G.K.Chesterton, English poet and novelist</I></pre>
-        <h1><font size = 24>What motivates you?</font></h1>
+        <h1><div class=gr>What motivates you?</div></h1>
 	<h2>Reading & speaking</h2>
         <div class=column>
 	  <p><b>a</b> Think of a person you consider to be successful.What makes you think they are succcessful?What, in your view, are the reasons for their success?
@@ -108,8 +132,38 @@ But I did come to London, and even though it was a very tough environment, I wor
 </div>
 </tr></td>
 	</table>
-	<div class=numb><b>4</b></div>
+	<div class=numb><div class=gr><b>4</b></div></div>
 	</div>
+	<script>
+		let example = `
+Hi! //comment;
+str s = "/*not a comment*/";
+/*"Another comment"*/bla-bla //123
+//"Something else?"
+str s2 = "//anotherone";
+/*"One""Two"*/`;
+		function stripcomments(str)
+		{	
+			let regex1 = /"(.+?)"/gm;
+			let arr = str.match(regex1);
+			console.log(arr);
+			let arr2 = new Array(arr.length);
+			for (let i = 0; i < arr.length; i++){
+  				arr2[i] = "\""+i+"\"";
+			}
+
+			let result = Object.assign(...arr2.map((k, i) => ({[k]: arr[i]})));
+			console.log(result);
+			let i = 0;
+			str2 = str.replace(regex1, function() { return "\""+(i++)+"\"";});
+			regex2 = /\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm;	
+		 	str3 = str2.replace(regex2, "");
+				
+			str_new = str3.replace(regex1,$0=>result[$0]||$0);	
+			return str_new
+		}
+		console.log(stripcomments(example));
+	</script>
     </body>
 
 </html>
