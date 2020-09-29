@@ -134,6 +134,36 @@ But I did come to London, and even though it was a very tough environment, I wor
 	</table>
 	<div class=numb><div class=gr><b>4</b></div></div>
 	</div>
+	<script>
+		let example = `
+Hi! //comment;
+str s = "/*not a comment*/";
+/*"Another comment"*/bla-bla //123
+//"Something else?"
+str s2 = "//anotherone";
+/*"One""Two"*/`;
+		function stripcomments(str)
+		{	
+			let regex1 = /"(.+?)"/gm;
+			let arr = str.match(regex1);
+			console.log(arr);
+			let arr2 = new Array(arr.length);
+			for (let i = 0; i < arr.length; i++){
+  				arr2[i] = "\""+i+"\"";
+			}
+
+			let result = Object.assign(...arr2.map((k, i) => ({[k]: arr[i]})));
+			console.log(result);
+			let i = 0;
+			str2 = str.replace(regex1, function() { return "\""+(i++)+"\"";});
+			regex2 = /\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm;	
+		 	str3 = str2.replace(regex2, "");
+				
+			str_new = str3.replace(regex1,$0=>result[$0]||$0);	
+			return str_new
+		}
+		console.log(stripcomments(example));
+	</script>
     </body>
 
 </html>
